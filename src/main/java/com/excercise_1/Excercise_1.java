@@ -1,4 +1,4 @@
-package com.active_edge_accessment_app.excercise_1;
+package com.excercise_1;
 
 import java.util.Arrays;
 
