@@ -6,7 +6,9 @@ import org.springframework.data.domain.Page;
 
 public interface StockService {
 
-    Page<StockDTO> getStocks(PageCreteria pageCreteria);
+    StockDTO createStock(StockDTO stockDTO);
 
     StockDTO getStockById(Long id);
+    Page<StockDTO> getStocks(PageCreteria pageCreteria);
+
 }

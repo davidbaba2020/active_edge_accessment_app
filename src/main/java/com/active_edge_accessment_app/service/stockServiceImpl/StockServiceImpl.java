@@ -24,6 +24,21 @@ public class StockServiceImpl implements StockService {
     private final ModelMapper modelMapper;
 
     private final static Logger logger = LoggerFactory.getLogger(StockServiceImpl.class);
+
+
+    @Override
+    public StockDTO createStock(StockDTO stockDTO) {
+        Stock savedStock = stockRepository.save(convertToStockEntity(stockDTO));
+        return convertToDTO(savedStock);
+    }
+
+    @Override
+    public StockDTO getStockById(Long id) {
+        Stock stock = stockRepository.findById(id)
+                .orElseThrow(() -> new StockNotFoundException("Stock with ID " + id + " was not found."));
+        logger.info("fetched stock,{}",stock);
+        return convertToDTO(stock);
+    }
     @Override
     public Page<StockDTO> getStocks(PageCreteria pageCreteria) {
         pageCreteria.setSortBy("id");
@@ -38,13 +53,6 @@ public class StockServiceImpl implements StockService {
     }
 
 
-    @Override
-    public StockDTO getStockById(Long id) {
-        Stock stock = stockRepository.findById(id)
-                .orElseThrow(() -> new StockNotFoundException("Stock with ID " + id + " was not found."));
-        logger.info("fetched stock,{}",stock);
-        return convertToDTO(stock);
-    }
 
 
 
