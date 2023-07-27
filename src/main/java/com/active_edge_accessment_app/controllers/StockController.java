@@ -15,6 +15,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -34,7 +35,11 @@ public class StockController {
     public ResponseEntity<Page<StockDTO>> getStocks(PageCreteria pageCreteria) {
         return new ResponseEntity<>(stockService.getStocks(pageCreteria), HttpStatus.OK);
     }
-
+    @GetMapping("/{id}")
+//    @ApiOperation("Get one stock from the list")
+    public ResponseEntity<StockDTO> getStock(@PathVariable Long id) {
+        return new ResponseEntity<>(stockService.getStockById(id),HttpStatus.OK);
+    }
 
 
 

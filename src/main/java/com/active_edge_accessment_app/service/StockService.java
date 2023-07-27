@@ -8,4 +8,5 @@ public interface StockService {
 
     Page<StockDTO> getStocks(PageCreteria pageCreteria);
 
+    StockDTO getStockById(Long id);
 }

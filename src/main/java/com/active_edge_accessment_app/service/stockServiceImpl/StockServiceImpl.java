@@ -3,6 +3,7 @@ package com.active_edge_accessment_app.service.stockServiceImpl;
 import com.active_edge_accessment_app.dto.PageCreteria;
 import com.active_edge_accessment_app.dto.StockDTO;
 import com.active_edge_accessment_app.entities.Stock;
+import com.active_edge_accessment_app.exceptions.StockNotFoundException;
 import com.active_edge_accessment_app.repositories.StockRepository;
 import com.active_edge_accessment_app.service.StockService;
 import lombok.AllArgsConstructor;
@@ -36,6 +37,14 @@ public class StockServiceImpl implements StockService {
         return new PageImpl<>(stockDTOList, pageable, stockPage.getTotalElements());
     }
 
+
+    @Override
+    public StockDTO getStockById(Long id) {
+        Stock stock = stockRepository.findById(id)
+                .orElseThrow(() -> new StockNotFoundException("Stock with ID " + id + " was not found."));
+        logger.info("fetched stock,{}",stock);
+        return convertToDTO(stock);
+    }
 
 
 
