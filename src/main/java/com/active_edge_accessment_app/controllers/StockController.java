@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -40,16 +41,12 @@ public class StockController {
     }
     @GetMapping
 //    @ApiOperation("Get a list of stocks with pagination")
-    public ResponseEntity<Page<StockDTO>> getStocks(PageCreteria pageCreteria) {
+    public ResponseEntity<Page<StockDTO>> getStocks(@ParameterObject PageCreteria pageCreteria) {
         return new ResponseEntity<>(stockService.getStocks(pageCreteria), HttpStatus.OK);
     }
 
 
-    @PutMapping("/{id}")
-//    @ApiOperation("Update the price of a single stock")
-    public ResponseEntity<StockDTO> updateStockPrice(@PathVariable Long id, @RequestBody Double newPrice) {
-        return new ResponseEntity<>(stockService.updateStockPrice(id, newPrice),HttpStatus.CREATED);
-    }
+
 
 
 }
