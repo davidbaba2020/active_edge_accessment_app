@@ -52,7 +52,14 @@ public class StockServiceImpl implements StockService {
         return new PageImpl<>(stockDTOList, pageable, stockPage.getTotalElements());
     }
 
-
+    @Override
+    public StockDTO updateStockPrice(Long id, Double price) {
+        Stock stock = stockRepository.findById(id)
+                .orElseThrow(() -> new StockNotFoundException("Stock with ID " + id + " was not found."));
+        stock.setCurrentPrice(price);
+        stockRepository.save(stock);
+        return convertToDTO(stock);
+    }
 
 
 

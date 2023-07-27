@@ -11,4 +11,5 @@ public interface StockService {
     StockDTO getStockById(Long id);
     Page<StockDTO> getStocks(PageCreteria pageCreteria);
 
+    StockDTO updateStockPrice(Long id, Double price);
 }

@@ -33,7 +33,6 @@ public class StockController {
     public ResponseEntity<StockDTO> createStock(@RequestBody StockDTO stockDTO) {
         return new ResponseEntity<>(stockService.createStock(stockDTO),HttpStatus.CREATED);
     }
-
     @GetMapping("/{id}")
 //    @ApiOperation("Get one stock from the list")
     public ResponseEntity<StockDTO> getStock(@PathVariable Long id) {
@@ -46,6 +45,11 @@ public class StockController {
     }
 
 
+    @PutMapping("/{id}")
+//    @ApiOperation("Update the price of a single stock")
+    public ResponseEntity<StockDTO> updateStockPrice(@PathVariable Long id, @RequestBody Double newPrice) {
+        return new ResponseEntity<>(stockService.updateStockPrice(id, newPrice),HttpStatus.CREATED);
+    }
 
 
 }
